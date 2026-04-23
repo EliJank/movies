@@ -61,7 +61,7 @@ const MovieList = () => {
           <MovieDetails
             id={selectedId}
             handleClose={handleCloseDetails}
-            isLoading={IsDetailsLoading}
+            isLoading={isDetailsLoading}
           />
         )}
 
