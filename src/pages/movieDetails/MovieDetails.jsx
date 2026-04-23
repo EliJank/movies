@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
-import { Col, Modal, Row } from "react-bootstrap";
+import { Col, Modal, Row, Button} from "react-bootstrap";
 import { API_URL, API_KEY } from "../../utils/constants";
 
-const MovieDetails = ({ id, handleClose, isLoading }) => {
+const MovieDetails = ({ id, handleClose, isLoading, setIsLoading }) => {
   const [movie, setMovie] = useState(null);
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const url = `${API_URL}/?${API_KEY}&i=${id}`;
-    isLoading(true);
+    const url = `${API_URL}/?${API_KEY}&i=${id}`
+    setIsLoading(true)
     setTimeout(() => {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
           setMovie(data);
         })
-        .finally(() => isLoading(false));
+        .finally(() => setIsLoading(false));
     }, 1000);
   }, [id]);
 
@@ -31,7 +31,7 @@ const MovieDetails = ({ id, handleClose, isLoading }) => {
               <Col xs={12} md={8}>
                 <div className="ps-md-3">
                   <h5 className="mb-3">About the movie</h5>
-                  <p stylr={{ fontSize: "1.1rem", lineHeight: "1.6" }}>
+                  <p style={{ fontSize: "1.1rem", lineHeight: "1.6" }}>
                     {movie.Plot}
                   </p>
                   <hr />
